@@ -4,16 +4,18 @@ import {Button, Modal, FormControl} from 'react-bootstrap';
 export default class UserWelcome extends Component {
       constructor(props, context) {
     super(props, context);
-
+        this.state = {pinURI: ""};
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
+    this.updatePinURI = this.updatePinURI.bind(this);
     this.state = {
       show: false,
     };
   }
 
   handleClose() {
+    const {pinURI} = this.state;
+    this.props.addPin({'link': pinURI}); 
     this.setState({ show: false });
   }
 
@@ -21,6 +23,9 @@ export default class UserWelcome extends Component {
     this.setState({ show: true });
   }
   
+  updatePinURI(evt) {
+      this.setState({"pinURI": evt.target.value});
+  }
     render() {
         const {currentUser} = this.props;
         return (
@@ -32,7 +37,7 @@ export default class UserWelcome extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
-          <FormControl />
+          <FormControl name="imagepin" value={this.state.pinURI} onChange={this.updatePinURI}/>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close

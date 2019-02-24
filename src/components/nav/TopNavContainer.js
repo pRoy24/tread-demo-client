@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {loginUser, loginUserSuccess, loginUserFailure,
   authenticateUser, authenticateUserSuccess, authenticateUserFailure
 } from '../../actions/user';
+import {addPin, addPinSuccess, addPinFailure} from '../../actions/board';
+
 
 function mapStateToProps(state) {
   return {user: state.user}
@@ -29,6 +31,15 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(loginUserFailure(response.payload.error));
         }
       });
+    },
+    addPin: (payload) => {
+      dispatch(addPin(payload)).then((response)=>{
+        if (response.payload.status === 200) {
+          dispatch(addPinSuccess(response.payload.data));
+        } else {
+          dispatch(addPinFailure(response.payload.error));
+        }
+      });      
     }
   }
 }

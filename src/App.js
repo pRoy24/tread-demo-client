@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Landing from './components/main/Landing';
+import LandingContainer from './components/main/LandingContainer';
 import TopNavContainer from './components/nav/TopNavContainer';
 import AuthenticationContainer from './components/auth/AuthenticationContainer'; 
 import history from './history';
@@ -14,7 +14,7 @@ class App extends Component {
         <Router history={history}>
           <div>
             <TopNavContainer/>
-              <Route exact path="/" component={Landing}/>
+              <Route exact path="/" component={LandingContainer}/>
               <Route path="/auth/callback" component={AuthenticationContainer}/>
           </div>
         </Router>

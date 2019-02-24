@@ -20,13 +20,13 @@ export default class TopNavBar extends Component {
   }
 
     render() {
-        const {user: {currentUser, isInit}} = this.props;
+        const {user: {currentUser, isInit}, addPin} = this.props;
         let rightNav = <span/>;
         if (isInit) {
           rightNav = <span/>;
         } else {
           if (isNonEmptyObject(currentUser)) {
-            rightNav = <UserWelcome currentUser={currentUser}/>;
+            rightNav = <UserWelcome currentUser={currentUser} addPin={addPin}/>;
           } else {
             rightNav = <div><a href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${AUTH_REDIRECT_URI}`} target="_blank">Login</a></div> ;
           }
