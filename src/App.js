@@ -4,6 +4,7 @@ import './App.css';
 import LandingContainer from './components/main/LandingContainer';
 import TopNavContainer from './components/nav/TopNavContainer';
 import AuthenticationContainer from './components/auth/AuthenticationContainer'; 
+import ProfileWallContainer from './components/profile/ProfileWallContainer';
 import history from './history';
 import {Router, Route} from 'react-router-dom';
 
@@ -16,6 +17,9 @@ class App extends Component {
             <TopNavContainer/>
               <Route exact path="/" component={LandingContainer}/>
               <Route path="/auth/callback" component={AuthenticationContainer}/>
+
+              <Route path="/user/:userName" component={ProfileWallContainer}/>
+
           </div>
         </Router>
       </div>

@@ -18,11 +18,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(authenticateUser()).then((response)=>{
         if (response.payload.status === 200) {
           dispatch(authenticateUserSuccess(response.payload.data));
-        } else {
-          dispatch(authenticateUserFailure(response.payload.error));
         }
+      }).catch(function(err){
+          dispatch(authenticateUserFailure(err));        
       });      
     },  
+    
     loginUser: () => {
       dispatch(loginUser()).then((response)=>{
         if (response.payload.status === 200) {

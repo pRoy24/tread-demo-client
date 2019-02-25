@@ -1,7 +1,8 @@
 import Landing from './Landing';
 
 
-import {getUserWall, getUserWallSuccess, getUserWallFailure} from '../../actions/board';
+import {getUserWall, getUserWallSuccess, getUserWallFailure,
+        getUserProfiles, getUserProfilesSuccess, getUserProfilesFailure} from '../../actions/board';
 
 import {connect} from 'react-redux';
 
@@ -11,15 +12,24 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUserWall: (code) => {
-      dispatch(getUserWall(code)).then((response)=>{
+    getUserWall: (page) => {
+      dispatch(getUserWall(page)).then((response)=>{
         if (response.payload.status === 200) {
           dispatch(getUserWallSuccess(response.payload.data));
-        } else {
-          dispatch(getUserWallFailure(response.payload.error));
-        }
+        } 
+      }).catch(function(err){
+          dispatch(getUserWallFailure(err));        
       });      
-    },  
+    },
+    getUserProfiles: () => {
+      dispatch(getUserProfiles()).then((response)=>{
+        if (response.payload.status === 200) {
+          dispatch(getUserProfilesSuccess(response.payload.data));
+        } 
+      }).catch(function(err){
+          dispatch(getUserProfilesFailure(err));        
+      });       
+    }
   }
 }
 

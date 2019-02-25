@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, NavDropdown, Row, Col} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown, Row, Col, Container} from 'react-bootstrap';
 import {isNonEmptyObject} from '../../utils/ObjectUtils';
 import UserWelcome from './UserWelcome';
 const GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
@@ -32,21 +32,15 @@ export default class TopNavBar extends Component {
           }
         }
         return (
-          <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Col lg={8}>
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-            </Col>
-            <Col lg={4}>
-              {rightNav}
-            </Col>
-          </Navbar>
+          <Container fluid>
+
+              <Navbar bg="light" expand="lg">
+              <Navbar.Brand href="#home">Tread Project Demo</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    {rightNav}
+               </Navbar>
+       
+          </Container>
             )
     }
 }

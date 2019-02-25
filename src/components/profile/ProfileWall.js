@@ -1,44 +1,51 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import {Row, Col} from 'react-bootstrap';
 import {isNonEmptyArray} from '../../utils/ObjectUtils';
 import InfiniteScroll from 'react-infinite-scroller';
 
-
 let brakePoints = [350, 500, 750];
 
-
-export default class UserHome extends Component {
+class ProfileWall extends Component {
     constructor(props) {
     	super(props);
     	this.loadMoreItems = this.loadMoreItems.bind(this);
     }
     componentWillMount() {
-        this.props.getUserWall(1);
+      const {match:{params}} = this.props;
+        if (params && params.userName) {
+        this.props.getProfileWall(params.userName, 1);
+      }
     }
     
+    
     loadMoreItems() {
-    	const {board: {nextPage}} = this.props;
-    	console.log(nextPage);
+    	const {board: {nextPage}, match:{params}} = this.props;
     	if (nextPage !== -1) {
-    		this.props.getUserWall(nextPage);
+            if (params && params.userName) {
+              this.props.getProfileWall(params.userName, 1);
+            }
     	}
     }
+    
     render() {
-        const {board: {userWall}} = this.props;
+        const {board: {profileWall}} = this.props;
         let imageTiles = [];
-        if (isNonEmptyArray(userWall)) {
-          imageTiles = userWall.map(function(item,idx){
+        if (isNonEmptyArray(profileWall)) {
+          imageTiles = profileWall.map(function(item,idx){
+              console.log(item);
+         //     console.log(item.imageLink);
             return <Tile src={item.imageLink}/>
           }) ;
         }
+      //  console.log(imageTiles);
+        
         if (imageTiles.length === 0) {
         	return <span/>;
         }
 		return (
 			<div className="container">
 				<div className="masonry-container">
-				
-				
 				<InfiniteScroll
 				    pageStart={1}
 				    loadMore={this.loadMoreItems}
@@ -48,13 +55,7 @@ export default class UserHome extends Component {
 					<Masonry brakePoints={brakePoints}>
                         {imageTiles}
 					</Masonry>
-					
-					
-					
-					
-</InfiniteScroll>
-					
-					
+                </InfiniteScroll>
 				</div>
 			</div>
 		)
@@ -124,3 +125,10 @@ class Masonry extends React.Component{
 	}
 }
 
+
+
+
+
+
+
+export default withRouter(ProfileWall);

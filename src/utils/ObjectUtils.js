@@ -12,10 +12,16 @@ module.exports = {
         }
         return false;
     },
-    isEmptyString(str) {
+    isEmptyString: function(str) {
         if (typeof str === "undefined" || str === null || str.trim().length === 0) {
             return true;
         }
         return false;
+    },
+    isNonEmptyArray: function(arr) {
+        if (typeof arr === "undefined" || arr === null || arr.length === 0 || !Array.isArray(arr)) {
+            return false;
+        }
+        return true;        
     }
 }

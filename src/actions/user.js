@@ -42,6 +42,7 @@ export function authenticateUserSuccess(response) {
 }
 
 export function authenticateUserFailure(error) {
+    console.log("ERRR");
     return {
         type: AUTHENTICATE_USER_FAILURE,
         payload: error
