@@ -44,7 +44,7 @@ export  default function userReducer(state = initialState, action) {
     case GET_PROFILE_WALL_FAILURE:
       return {...state}
     case RESET_PROFILE_WALL:
-      return {...state, isInit: true, profileWall: [], nextPage: 1}
+      return {...state, profileWall: [], nextPage: 1}
     case ADD_PIN:
       return {...state}
     case ADD_PIN_SUCCESS:

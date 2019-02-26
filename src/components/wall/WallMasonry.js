@@ -18,11 +18,12 @@ export default class WallMasonry extends React.Component{
 	}
 	
 	onResize(){
+		if (this.refs && this.refs.Masonry) {
 		const columns = this.getColumns(this.refs.Masonry.offsetWidth);
 		if(columns !== this.state.columns){
 			this.setState({columns: columns});	
 		}
-		
+		}
 	}
 	
 	mapChildren(){

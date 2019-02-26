@@ -4,6 +4,13 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 const CLIENT_URI = process.env.REACT_APP_FRONTEND;
 
 export default class ImageTile extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {'showLinks': false};
+	}
+	componentWillMount() {
+
+	}
 	render() {
 		const {src,link, allowDelete} = this.props;
 		let linkText = <span/>;
@@ -11,7 +18,7 @@ export default class ImageTile extends Component {
 		if (allowDelete) {
 			deleteProduct = <div className="delete-link" onClick={this.props.deletePin}>Delete&nbsp;<i className="fa fa-trash"/></div>;
 		}
-		if (link) {
+		if (link && this.props.showLinks) {
 			const uri = `${CLIENT_URI}/link/${link}`;
 			
 			linkText = <div className='image-link-overlay'>

@@ -11,7 +11,7 @@ let brakePoints = [350, 500, 750];
 class ProfileWall extends Component {
     constructor(props) {
     	super(props);
-    	this.state= {hasMore: true}    	
+    	this.state= {hasMore: true, showLinks: false};    	
     	this.loadMoreItems = this.loadMoreItems.bind(this);
     }
     componentWillMount() {
@@ -19,6 +19,10 @@ class ProfileWall extends Component {
         if (params && params.userName) {
         this.props.getProfileWall(params.userName, 1);
       }
+		const self = this;
+		setTimeout(function(){
+			self.setState({'showLinks': true});
+		}, 1000);      
     }
     
     componentWillUnmount() {
@@ -29,20 +33,21 @@ class ProfileWall extends Component {
     	const {board: {nextPage}, match:{params}} = this.props;
     	if (nextPage !== -1) {
             if (params && params.userName) {
-              this.props.getProfileWall(params.userName, 1);
+              this.props.getProfileWall(params.userName, nextPage);
             }
     	} else {
-    	     this.setState({hasMore: false});  
+    	   this.setState({hasMore: false});  
     	}
     }
     
     render() {
         const {board: {profileWall}} = this.props;
         let imageTiles = [];
+        const self = this;
         if (isNonEmptyArray(profileWall)) {
           imageTiles = profileWall.map(function(item,idx){
-
-            return <ImageTile src={item.imageLink} link={item.urlHash} allowDelete={false}/>
+            return <ImageTile src={item.imageLink} link={item.urlHash} allowDelete={false} key={item.urlHash+idx}
+            showLinks={self.state.showLinks}/>
           }) ;
         }
 

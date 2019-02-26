@@ -13,10 +13,14 @@ export default class UserHome extends Component {
     	super(props);
     	this.loadMoreItems = this.loadMoreItems.bind(this);
     	this.deletePin = this.deletePin.bind(this);
-    	this.state= {hasMore: true}
+    	this.state= {hasMore: true, showLinks: false}
     }
     componentWillMount() {
         this.props.getUserWall(1);
+    		const self = this;
+    		setTimeout(function(){
+    			self.setState({'showLinks': true});
+    		}, 1000);         
     }
     
     loadMoreItems() {
@@ -40,7 +44,8 @@ export default class UserHome extends Component {
         const self = this;
         if (isNonEmptyArray(userWall)) {
           imageTiles = userWall.map(function(item,idx){
-            return <ImageTile src={item.imageLink} link={item.urlHash} allowDelete={true} deletePin={self.deletePin.bind(self, item)}/>
+            return <ImageTile src={item.imageLink} link={item.urlHash} allowDelete={true}
+            deletePin={self.deletePin.bind(self, item)} showLinks={self.state.showLinks} key={item.urlHash + idx}/>
           }) ;
         }
         if (imageTiles.length === 0) {
