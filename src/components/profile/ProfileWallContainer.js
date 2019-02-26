@@ -1,6 +1,6 @@
 import ProfileWall from './ProfileWall';
 
-import {getProfileWall, getProfileWallSuccess, getProfileWallFailure} from '../../actions/board';
+import {getProfileWall, getProfileWallSuccess, getProfileWallFailure, resetProfileWall} from '../../actions/board';
 
 import {connect} from 'react-redux';
 
@@ -19,6 +19,10 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(getProfileWallFailure(err));        
       });           
     },
+    
+    resetProfileWall: () => {
+      dispatch(resetProfileWall());
+    }
   }
 }
 

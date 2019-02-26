@@ -30,24 +30,22 @@ export default class UserWelcome extends Component {
         const {currentUser} = this.props;
         return (
             <div>
-              Welcome 
-              <Button onClick={this.handleShow}>Add Image Pin</Button>
-              
-        <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <FormControl name="imagepin" value={this.state.pinURI} onChange={this.updatePinURI}/>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        
+
+              <Button onClick={this.handleShow} className="add-image-button">Add Image Pin</Button>
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                  </Modal.Header>
+                  <FormControl name="imagepin" value={this.state.pinURI} onChange={this.updatePinURI}/>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={this.handleClose}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={this.handleClose}>
+                      Save Changes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
             </div>
             )
     }

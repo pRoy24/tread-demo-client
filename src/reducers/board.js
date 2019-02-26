@@ -1,6 +1,6 @@
 import {GET_USER_WALL, GET_USER_WALL_SUCCESS, GET_USER_WALL_FAILURE, GET_USER_PROFILES,
   GET_USER_PROFILES_SUCCESS, GET_USER_PROFILES_FAILURE, GET_PROFILE_WALL, GET_PROFILE_WALL_SUCCESS,
-  GET_PROFILE_WALL_FAILURE
+  GET_PROFILE_WALL_FAILURE, ADD_PIN, ADD_PIN_SUCCESS, ADD_PIN_FAILURE, RESET_PROFILE_WALL
 } from '../actions/board';
 
 const initialState = { userWall: [], userProfiles: [], isInit: true, userProfileInit: true, nextPage: 1, profileWall: []};
@@ -39,7 +39,17 @@ export  default function userReducer(state = initialState, action) {
       return {...state, isInit: false, profileWall: profileWall, nextPage: next};
     case GET_PROFILE_WALL_FAILURE:
       return {...state}
-      
+    case RESET_PROFILE_WALL:
+      return {...state, isInit: true, profileWall: [], nextPage: 1}
+    case ADD_PIN:
+      return {...state}
+    case ADD_PIN_SUCCESS:
+      const {pin} = action.payload;
+      currentWall = state.userWall;
+      currentWall.unshift(pin);
+      return {...state, userWall: currentWall}
+    case ADD_PIN_FAILURE:
+      return {...state}
     default:
       return {...state};
   }

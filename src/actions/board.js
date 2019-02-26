@@ -17,6 +17,8 @@ export const GET_PROFILE_WALL = 'GET_PROFILE_WALL';
 export const GET_PROFILE_WALL_SUCCESS = 'GET_PROFILE_WALL_SUCCESS';
 export const GET_PROFILE_WALL_FAILURE = 'GET_PROFILE_WALL_FAILURE';
 
+export const RESET_PROFILE_WALL = 'RESET_PROFILE_WALL';
+
 const API_SERVER = process.env.REACT_APP_API_SERVER;
 
 export function addPin(payload) {
@@ -108,5 +110,11 @@ export function getProfileWallFailure(error) {
     return {
         type: GET_PROFILE_WALL_FAILURE,
         payload: error
+    }
+}
+
+export function resetProfileWall() {
+    return {
+        type: RESET_PROFILE_WALL
     }
 }

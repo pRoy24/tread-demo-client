@@ -24,7 +24,7 @@ export default class Landing extends Component {
             }
         }
         return (
-            <Container>
+            <Container className="landing-container">
                 {currentView}    
             </Container>
             )
