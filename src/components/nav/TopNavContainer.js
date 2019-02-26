@@ -3,7 +3,7 @@ import TopNavBar from './TopNavBar';
 import {connect} from 'react-redux';
 
 import {loginUser, loginUserSuccess, loginUserFailure,
-  authenticateUser, authenticateUserSuccess, authenticateUserFailure
+  authenticateUser, authenticateUserSuccess, authenticateUserFailure, resetUser
 } from '../../actions/user';
 import {addPin, addPinSuccess, addPinFailure} from '../../actions/board';
 
@@ -23,6 +23,10 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(authenticateUserFailure(err));        
       });      
     },  
+    
+    logoutUser: ()=> {
+      dispatch(resetUser());  
+    },
     
     loginUser: () => {
       dispatch(loginUser()).then((response)=>{

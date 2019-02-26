@@ -2,7 +2,9 @@ import Landing from './Landing';
 
 
 import {getUserWall, getUserWallSuccess, getUserWallFailure,
-        getUserProfiles, getUserProfilesSuccess, getUserProfilesFailure} from '../../actions/board';
+        getUserProfiles, getUserProfilesSuccess, getUserProfilesFailure, deletePin, deletePinSuccess,
+  deletePinFailure
+} from '../../actions/board';
 
 import {connect} from 'react-redux';
 
@@ -28,6 +30,15 @@ const mapDispatchToProps = (dispatch) => {
         } 
       }).catch(function(err){
           dispatch(getUserProfilesFailure(err));        
+      });       
+    },
+    deletePin: (pinId) => {
+      dispatch(deletePin(pinId)).then((response)=>{
+        if (response.payload.status === 200) {
+          dispatch(deletePinSuccess(response.payload.data));
+        } 
+      }).catch(function(err){
+          dispatch(deletePinFailure(err));        
       });       
     }
   }

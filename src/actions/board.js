@@ -19,6 +19,15 @@ export const GET_PROFILE_WALL_FAILURE = 'GET_PROFILE_WALL_FAILURE';
 
 export const RESET_PROFILE_WALL = 'RESET_PROFILE_WALL';
 
+export const DELETE_PIN = 'DELETE_PIN';
+export const DELETE_PIN_SUCCESS = 'DELETE_PIN_SUCCESS';
+export const DELETE_PIN_FAILURE = 'DELETE_PIN_FAILURE';
+
+export const GET_LINK_URL = 'GET_LINK_URL';
+export const GET_LINK_URL_SUCCESS = 'GET_LINK_URL_SUCCESS';
+export const GET_LINK_URL_FAILURE = 'GET_LINK_URL_FAILURE';
+export const RESET_LINK_URL = 'RESET_LINK_URL';
+
 const API_SERVER = process.env.REACT_APP_API_SERVER;
 
 export function addPin(payload) {
@@ -54,7 +63,6 @@ export function getUserWall(page) {
 }
 
 export function getUserWallSuccess(response) {
-    console.log(response);
     return {
         type: GET_USER_WALL_SUCCESS,
         payload: response
@@ -116,5 +124,50 @@ export function getProfileWallFailure(error) {
 export function resetProfileWall() {
     return {
         type: RESET_PROFILE_WALL
+    }
+}
+
+export function deletePin(pinId) {
+    const header = {"userToken": localStorage.getItem("userToken")};
+    const request = axios.delete(`${API_SERVER}/api/delete_pin?id=${pinId}`, {'headers': header});
+    return {
+        type: DELETE_PIN,
+        payload: request
+    }
+}
+
+export function deletePinSuccess(response) {
+    return {
+        type: DELETE_PIN_SUCCESS,
+        payload: response
+    }
+}
+
+export function deletePinFailure(error) {
+    return {
+       type: DELETE_PIN_FAILURE,
+       payload: error
+    }
+}
+
+export function getLinkUrl(hash) {
+    const request = axios.get(`${API_SERVER}/api/full_url?hash=${hash}`);
+    return {
+        type: GET_LINK_URL,
+        payload: request
+    }
+}
+
+export function getLinkUrlSuccess(response) {
+    return {
+        type: GET_LINK_URL_SUCCESS,
+        payload: response
+    }
+}
+
+export function getLinkUrlFailure(error) {
+    return {
+        type: GET_LINK_URL_FAILURE,
+        payload: error
     }
 }

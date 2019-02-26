@@ -12,6 +12,7 @@ export default class UserHome extends Component {
     constructor(props) {
     	super(props);
     	this.loadMoreItems = this.loadMoreItems.bind(this);
+    	this.deletePin = this.deletePin.bind(this);
     	this.state= {hasMore: true}
     }
     componentWillMount() {
@@ -27,13 +28,19 @@ export default class UserHome extends Component {
     		this.setState({hasMore: false});
     	}
     }
+    
+    deletePin(item) {
+  
+      this.props.deletePin(item._id);
+    }
+    
     render() {
         const {board: {userWall}} = this.props;
         let imageTiles = [];
+        const self = this;
         if (isNonEmptyArray(userWall)) {
           imageTiles = userWall.map(function(item,idx){
-          	console.log(item);
-            return <ImageTile src={item.imageLink} text={<p>{CLIENT_URI}/link/${item.urlHash}</p>}/>
+            return <ImageTile src={item.imageLink} link={item.urlHash} allowDelete={true} deletePin={self.deletePin.bind(self, item)}/>
           }) ;
         }
         if (imageTiles.length === 0) {

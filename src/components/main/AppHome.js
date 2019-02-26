@@ -9,17 +9,15 @@ export default class AppHome extends Component {
     }
     render() {
       const {board, board: {userProfiles}} = this.props;
-      console.log(userProfiles);
       let userProfileList = <span/>;
       if (isNonEmptyArray(userProfiles)) {
           userProfileList = userProfiles.map(function(item, idx){
-              return <UserProfileTile user={item}/>
+              return <UserProfileTile user={item} key={"profile-img"+idx}/>
           })
       }
       return (
         <Row>
            {userProfileList}
-
         </Row>
             )
     }
@@ -27,12 +25,16 @@ export default class AppHome extends Component {
 
 class UserProfileTile extends Component {
     render() {
-        const {user, user: {userName}} = this.props;
-
-        return <Col lg={3}>
+        const {user, user: {userName, name}} = this.props;
+        return (
+        <Col lg={3}>
         <Link to={`/user/${userName}`}>
-        <img src={user.avatar_url} className="profile-img"/>
+          <img src={user.avatar_url} className="profile-img"/>
+          <div className="user-detail">
+           <div> Username {userName}</div>
+            <div>Name {name}</div>
+          </div>
         </Link>
-        </Col>
+        </Col>)
     }
 }

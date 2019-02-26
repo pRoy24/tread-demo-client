@@ -29,7 +29,7 @@ export default class TopNavBar extends Component {
           rightNav = <span/>;
         } else {
           if (isNonEmptyObject(currentUser)) {
-            rightNav = <UserWelcome currentUser={currentUser} addPin={addPin}/>;
+            rightNav = <UserWelcome currentUser={currentUser} addPin={addPin} logoutUser={this.props.logoutUser}/>;
           } else {
             rightNav = <div>
             <a href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${AUTH_REDIRECT_URI}`} target="_blank">

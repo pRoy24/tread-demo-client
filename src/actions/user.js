@@ -11,6 +11,8 @@ export const AUTHORIZE_CREDENTIALS = 'AUTHORIZE_CREDENTIALS';
 export const AUTHORIZE_CREDENTIALS_SUCCESS = 'AUTHORIZE_CREDENTIALS_SUCCESS';
 export const AUTHORIZE_CREDENTIALS_FAILURE = 'AUTHORIZE_CREDENTIALS_FAILURE';
 
+export const RESET_USER = 'RESET_USER';
+
 const API_SERVER = process.env.REACT_APP_API_SERVER;
 
 export function loginUser() {
@@ -42,7 +44,6 @@ export function authenticateUserSuccess(response) {
 }
 
 export function authenticateUserFailure(error) {
-    console.log("ERRR");
     return {
         type: AUTHENTICATE_USER_FAILURE,
         payload: error
@@ -68,5 +69,12 @@ export function authorizeCredentialsFailure(error) {
     return {
         type: AUTHORIZE_CREDENTIALS_FAILURE,
         payload: error
+    }
+}
+
+export function resetUser() {
+    localStorage.removeItem('userToken');
+    return {
+        type: RESET_USER
     }
 }

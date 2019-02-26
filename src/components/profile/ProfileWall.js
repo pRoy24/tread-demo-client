@@ -11,6 +11,7 @@ let brakePoints = [350, 500, 750];
 class ProfileWall extends Component {
     constructor(props) {
     	super(props);
+    	this.state= {hasMore: true}    	
     	this.loadMoreItems = this.loadMoreItems.bind(this);
     }
     componentWillMount() {
@@ -30,6 +31,8 @@ class ProfileWall extends Component {
             if (params && params.userName) {
               this.props.getProfileWall(params.userName, 1);
             }
+    	} else {
+    	     this.setState({hasMore: false});  
     	}
     }
     
@@ -39,7 +42,7 @@ class ProfileWall extends Component {
         if (isNonEmptyArray(profileWall)) {
           imageTiles = profileWall.map(function(item,idx){
 
-            return <ImageTile src={item.imageLink}/>
+            return <ImageTile src={item.imageLink} link={item.urlHash} allowDelete={false}/>
           }) ;
         }
 
@@ -53,7 +56,7 @@ class ProfileWall extends Component {
 				<InfiniteScroll
 				    pageStart={1}
 				    loadMore={this.loadMoreItems}
-				    hasMore={true || false}
+				    hasMore={this.state.hasMore}
 				    loader={<div className="loader" key={0}>Loading ...</div>}
 				>
 					<WallMasonry brakePoints={brakePoints}>

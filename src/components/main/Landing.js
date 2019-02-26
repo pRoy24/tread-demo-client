@@ -11,14 +11,14 @@ export default class Landing extends Component {
         
     }
     render() {
-        const {getUserWall, board, user, user: {currentUser}, getUserProfiles} = this.props;
+        const {getUserWall, board, user, user: {currentUser}, getUserProfiles, deletePin} = this.props;
 
         let currentView = <span/>;
         if (user.isInit) {
             currentView = <i className="fa fa-spinner fa-spin"/>;
         } else {
             if (isNonEmptyObject(currentUser)) {
-              currentView = <UserHome getUserWall={getUserWall} board={board}/>
+              currentView = <UserHome getUserWall={getUserWall} board={board} deletePin={deletePin}/>
             } else {
               currentView = <AppHome board={board} getUserProfiles={getUserProfiles}/>;
             }

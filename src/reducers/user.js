@@ -1,5 +1,5 @@
 import {LOGIN_USER, AUTHORIZE_CREDENTIALS, AUTHORIZE_CREDENTIALS_SUCCESS, AUTHORIZE_CREDENTIALS_FAILURE,
-  AUTHENTICATE_USER, AUTHENTICATE_USER_SUCCESS, AUTHENTICATE_USER_FAILURE
+  AUTHENTICATE_USER, AUTHENTICATE_USER_SUCCESS, AUTHENTICATE_USER_FAILURE, RESET_USER
 } from '../actions/user';
 
 const initialState = { currentUser: {}, isInit: true};
@@ -24,6 +24,8 @@ export  default function userReducer(state = initialState, action) {
       return {...state, currentUser: currentUser, isInit: false}
     case AUTHENTICATE_USER_FAILURE:
       return {...state, currentUser: {}, isInit: false}
+    case RESET_USER:
+      return {...state, currentUser: {}}
     default:
       return {...state};
   }
